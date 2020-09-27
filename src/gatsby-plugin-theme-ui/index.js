@@ -40,6 +40,6 @@ export default {
     ...chronoblogTheme.fonts,
     body: '-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif',
     heading: 'inherit',
-    monospace: 'Roboto, Rubik'
+    monospace: 'Menlo, monospace'
   }
 };
