@@ -1,6 +1,7 @@
 ---
 title: Video in Link Card
 date: 2019-11-11
+draft: true
 link: https://www.youtube.com/watch?v=7V6FFeZdFz4
 tags: ['video', 'link']
 ---

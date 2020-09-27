@@ -1,6 +1,7 @@
 ---
 title: 'Link to Chronoblog Theme repo'
 cover: ./image.jpg
+draft: true
 date: 2019-11-12
 link: https://github.com/Chronoblog/gatsby-theme-chronoblog
 tags: ['link', 'project']

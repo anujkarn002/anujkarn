@@ -2,7 +2,7 @@ import chronoblogTheme from 'gatsby-theme-chronoblog/src/gatsby-plugin-theme-ui'
 
 export default {
   ...chronoblogTheme,
-  initialColorMode: 'light',
+  initialColorMode: 'dark',
   colors: {
     ...chronoblogTheme.color,
     text: '#222',
@@ -40,6 +40,6 @@ export default {
     ...chronoblogTheme.fonts,
     body: '-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif',
     heading: 'inherit',
-    monospace: 'Menlo, monospace'
+    monospace: 'Roboto, Rubik'
   }
 };

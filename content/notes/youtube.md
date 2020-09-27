@@ -1,5 +1,6 @@
 ---
 date: 2018-10-26
+draft: true
 tags: ['video', 'note']
 ---
 

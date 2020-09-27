@@ -1,5 +1,6 @@
 ---
 date: 2018-10-02
+draft: true
 tags: ['note', 'code']
 ---
 

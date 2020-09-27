@@ -2,6 +2,7 @@
 title: Full Blog Post Example
 cover: ./image.jpg
 date: 2019-12-01
+draft: true
 description: All the usual blog post.
 tags: ['post']
 ---

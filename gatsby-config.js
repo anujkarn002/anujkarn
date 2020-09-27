@@ -2,34 +2,42 @@ const path = require('path');
 
 module.exports = {
   siteMetadata: {
-    siteTitle: 'Chronoblog Netlify CMS Example',
-    siteDescription: 'Starter for Gatsby Theme Chronoblog',
-    siteImage: '/banner.png', // main image of the site for metadata
-    siteUrl: 'https://chronoblog-netlify-cms.now.sh/',
+    siteTitle: 'Anuj Karn',
+    siteDescription: 'This is my personal space. I post blogs, codes and tutorials and memes too.',
+    siteImage: '/banner.png',
+    siteUrl: 'https://anujkarn.com.np/',
     pathPrefix: '/',
     siteLanguage: 'en',
     ogLanguage: `en_US`,
-    author: 'Site Author', // for example - 'Ivan Ganev'
-    authorDescription: 'short author description', // short text about the author
+    author: 'Anuj Karn',
+    authorDescription: 'Hey there! How are you?',
     avatar: '/avatar.jpg',
-    twitterSite: '', // website account on twitter
-    twitterCreator: '', // creator account on twitter
+    twitterSite: 'https://twitter.com/anujkarn002', // website account on twitter
+    twitterCreator: 'https://twitter.com/anujkarn002', // creator account on twitter
     social: [
       {
         icon: `at`,
-        url: `mailto:mymail@mail.com`
+        url: `mailto:hello@anujkarn.com.np`
       },
       {
         icon: `twitter`,
-        url: `https://twitter.com/ganevru`
+        url: `https://twitter.com/anujkarn002`
       },
       {
         icon: `github`,
-        url: `https://github.com/Chronoblog/gatsby-theme-chronoblog`
+        url: `https://github.com/anujkarn002`
       },
       {
-        icon: `node-js`,
-        url: `https://www.npmjs.com/package/gatsby-theme-chronoblog`
+        icon: `instagram`,
+        url: `https://instagram.com/anujkarn002`
+      },
+      {
+        icon: `linkedin`,
+        url: `https://linkedin.com/in/anujkarn002`
+      },
+      {
+        icon: `facebook`,
+        url: `https://facebook.com/anujkarn002`
       }
     ]
   },
@@ -70,8 +78,8 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `Chronoblog Gatsby Theme`,
-        short_name: `Chronoblog`,
+        name: `Anuj Karn`,
+        short_name: `aK`,
         start_url: `/`,
         background_color: `#fff`,
         theme_color: `#3a5f7d`,
@@ -85,8 +93,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-google-analytics`,
       options: {
-        // replace "UA-XXXXXXXXX-X" with your own Tracking ID
-        trackingId: 'UA-XXXXXXXXX-X'
+        trackingId: 'UA-143822123-1'
       }
     },
     {
@@ -96,6 +103,6 @@ module.exports = {
         modulePath: path.join(__dirname, `src`, `netlifycms`, 'cms.js')
       }
     },
-    'gatsby-plugin-netlify' // make sure to keep it last in the array
+    'gatsby-plugin-netlify' 
   ]
 };
