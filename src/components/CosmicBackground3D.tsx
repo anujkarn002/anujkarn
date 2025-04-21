@@ -37,6 +37,7 @@ export default function CosmicBackground3D() {
         <Stars radius={30} depth={60} count={2000} factor={3} fade speed={1} />
         <Suspense fallback={null}>
           {ships.map((s, i) => (
+            // @ts-ignore
             <Spaceship key={i} position={s.pos} speed={s.speed} color={s.color} />
           ))}
         </Suspense>

@@ -1,9 +1,8 @@
 "use client";
 import React, { useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { MeshProps } from "@react-three/fiber";
 
-function RobotHead(props: MeshProps) {
+function RobotHead(props: any) {
   // Simple floating animation
   const ref = useRef<any>(null);
   useFrame(({ clock }) => {

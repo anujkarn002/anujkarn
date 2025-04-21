@@ -46,7 +46,7 @@ const timelineEvents = [
 
 // Helper: cartoon/anime-style icons as SVG/JSX
 function SparkleEffect({ position = [0, 0, 0], scale = 1, active = false }) {
-  const group = useRef<any>();
+  const group = useRef<any>(undefined);
   useFrame(({ clock }) => {
     if (group.current) {
       group.current.children.forEach((mesh: any, i: number) => {
@@ -61,7 +61,7 @@ function SparkleEffect({ position = [0, 0, 0], scale = 1, active = false }) {
       {Array.from({ length: 8 }).map((_, i) => (
         <mesh key={i}>
           <sphereGeometry args={[0.08, 8, 8]} />
-          <meshBasicMaterial color={BW.white} transparent opacity={active ? 0.38 : 0.22} emissive={BW.white} emissiveIntensity={active ? 1 : 0.5} />
+          <meshBasicMaterial color={BW.white} transparent opacity={active ? 0.38 : 0.22} />
         </mesh>
       ))}
     </group>
@@ -127,7 +127,7 @@ function StardustPath({ points }: { points: THREE.Vector3[] }) {
 }
 
 function TimelineNode({ event, position, onClick }: any) {
-  const meshRef = useRef<any>();
+  const meshRef = useRef<any>(undefined);
   const [hovered, setHovered] = useState(false);
   useFrame(({ clock }) => {
     if (meshRef.current) {
@@ -146,9 +146,6 @@ function TimelineNode({ event, position, onClick }: any) {
       onPointerDown={e => e.stopPropagation()}
       onPointerUp={e => e.stopPropagation()}
       onPointerMissed={e => e.stopPropagation()}
-      tabIndex={0}
-      onKeyDown={e => { if (e.key === "Enter" || e.key === " ") { e.stopPropagation(); onClick(); } }}
-      style={{ cursor: "pointer" }}
     >
       <CosmicIcon icon={event.icon} color={event.color} />
       <Html center distanceFactor={8} style={{ pointerEvents: "none" }}>

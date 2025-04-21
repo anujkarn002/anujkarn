@@ -40,7 +40,7 @@ function TimelinePath() {
 
 function TimelineNode({ event }: { event: typeof timelineEvents[0] }) {
   // Animate glow
-  const meshRef = React.useRef<any>();
+  const meshRef = React.useRef<any>(undefined);
   useFrame(({ clock }) => {
     if (meshRef.current) {
       meshRef.current.material.emissiveIntensity = 0.25 + 0.15 * Math.sin(clock.getElapsedTime() * 2 + event.pos[0]);
