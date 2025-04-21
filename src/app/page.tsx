@@ -1,103 +1,168 @@
-import Image from "next/image";
+"use client";
+import Link from "next/link";
+import BackgroundStars from "../components/BackgroundStars";
+import FloatingRobot from "../components/FloatingRobot";
+import { FaLaptop, FaMapMarkerAlt, FaGithub, FaLinkedin, FaFileAlt, FaRegFileAlt, FaRegFolderOpen } from "react-icons/fa";
+import { useActivities } from "../hooks/useActivities";
+
+const experience = [
+  {
+    position: "Full Stack Engineer",
+    company: "PivotX Advisors",
+    location: "India",
+    isRemote: true,
+    isOnsite: false,
+    isPresent: true
+  },
+  {
+    position: "Full Stack Developer",
+    company: "Upstem Technologies",
+    location: "Australia",
+    isRemote: true,
+    isOnsite: false,
+    isPresent: false
+  },
+  {
+    position: "Software Engineer",
+    company: "Leapfrog Technology",
+    location: "Nepal",
+    isRemote: false,
+    isOnsite: true,
+    isPresent: false
+  },
+  {
+    position: "Software Developer",
+    company: "Sunya Health Solutions",
+    location: "Nepal",
+    isRemote: false,
+    isOnsite: true,
+    isPresent: false
+  }
+];
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const { activities } = useActivities();
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  return (
+    <>
+      <BackgroundStars />
+      <main className="relative min-h-screen w-full flex flex-col items-center justify-center z-10 font-mono bg-matte-black text-white">
+        <div className="flex flex-col items-center justify-center w-full px-6 pt-24 pb-12" style={{ minHeight: '70vh' }}>
+          <h1 className="text-5xl md:text-7xl font-black text-white mb-2 tracking-tight text-center retro-shadow">Anuj Karn</h1>
+          <h2 className="text-lg md:text-2xl text-white/70 font-light mb-2 text-center retro-title">Software Engineer. Space & Technology Enthusiast.</h2>
+          <p className="max-w-2xl text-center text-white/60 text-base md:text-lg mb-8 retro-desc">
+            Building elegant tools for humans and exploring the universe through code.
+          </p>
+          <div className="flex gap-3 items-center justify-center mb-8 mt-2">
+            <a href="https://github.com/anujkarn" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-white transition text-2xl" title="GitHub"><FaGithub /></a>
+            <a href="https://linkedin.com/in/anujkarn" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-white transition text-2xl" title="LinkedIn"><FaLinkedin /></a>
+            <a href="/resume/Anuj_Karn_Resume_01_04_2025.pdf" download className="text-white/70 hover:text-white transition text-2xl" title="Résumé"><FaFileAlt /></a>
+          </div>
+          <div className="flex flex-col gap-12 w-full max-w-2xl mt-8 mb-6">
+            <section>
+              <h3 className="text-white text-base font-bold retro-section mb-4">Recent activities</h3>
+              <ul className="flex flex-col gap-4">
+                {activities.slice(0, 4).map((item, i) => (
+                  <li key={i} className="text-base md:text-lg group hover:bg-white/5 transition rounded px-2 -mx-2 py-1 flex flex-col">
+                    <span className="flex items-center gap-2">
+                      {item.type === 'Post' ? (
+                        <FaRegFileAlt className="text-xs text-white/40" />
+                      ) : (
+                        <FaRegFolderOpen className="text-xs text-white/40" />
+                      )}
+                      <Link
+                        href={item.type === 'Post' ? `/posts/${item.id}` : `/projects/${item.id}`}
+                        className="block text-white underline-offset-2 group-hover:underline transition"
+                      >
+                        {item.title}
+                      </Link>
+                    </span>
+                    <span className="flex items-center gap-2 mt-0.5">
+                      <span className="inline-block bg-white/10 text-white/60 text-xs px-2 py-0.5 rounded">
+                        {item.type}
+                      </span>
+                      <span className="text-xs text-white/50">{item.tags && item.tags.join(', ')}</span>
+                      <span className="text-xs text-white/30">{item.date}</span>
+                    </span>
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-4 flex justify-end">
+                <Link href="/activity" className="retro-link text-xs px-4 py-1">See more</Link>
+              </div>
+            </section>
+            <hr className="border-t border-white/10 my-8" />
+            <section>
+              <h3 className="text-white text-base font-bold retro-section mb-4">Skills</h3>
+              <p className="text-white/70 text-sm">Python, TypeScript, Go, React, Next.js, Docker, AWS, PostgreSQL, OpenCV, CI/CD, C#, Agile</p>
+            </section>
+            <hr className="border-t border-white/10 my-8" />
+            <section>
+              <h3 className="text-white text-base font-bold retro-section mb-4">Experience</h3>
+              <ul className="flex flex-col gap-4">
+                {experience.map((exp, i) => (
+                  <li key={i} className="text-base md:text-lg hover:bg-white/5 transition rounded px-2 -mx-2 py-1">
+                    <span className="flex items-center gap-2 text-white text-base">
+                      {exp.position}
+                      {exp.isPresent && (
+                        <span className="ml-2 px-2 py-0.5 rounded-full bg-white/10 text-white/80 text-xs font-semibold tracking-wide border border-white/30">Current</span>
+                      )}
+                    </span>
+                    <span className="flex items-center gap-2 text-sm text-white/70">
+                      {exp.company}, {exp.location}
+                      {exp.isRemote && <FaLaptop title="Remote" className="inline text-base text-white/40" />}
+                      {exp.isOnsite && <FaMapMarkerAlt title="On Site" className="inline text-base text-white/40" />}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          </div>
+          {/* Floating 3D Robot */}
+          <div className="fixed bottom-8 right-8 z-20">
+            <FloatingRobot />
+          </div>
         </div>
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+      <style jsx global>{`
+        .retro-shadow {
+          text-shadow: 2px 2px 0 #222, 4px 4px 0 #000;
+        }
+        .retro-title {
+          letter-spacing: 0.1em;
+        }
+        .retro-desc {
+          font-family: 'IBM Plex Mono', 'Fira Mono', 'Menlo', monospace;
+        }
+        .retro-section {
+          letter-spacing: 0.08em;
+          border-left: 4px solid #fff;
+          padding-left: 0.5em;
+        }
+        .retro-link {
+          color: #fff;
+          font-weight: 700;
+          text-decoration: none;
+          padding: 0.5em 1.2em;
+          border-radius: 9999px;
+          background: transparent;
+          border: 2px solid #fff;
+          transition: background 0.2s, color 0.2s;
+          font-size: 1rem;
+        }
+        .retro-link.resume-btn {
+          border-color: #5eead4;
+          color: #5eead4;
+        }
+        .retro-link.resume-btn:hover {
+          background: #5eead4;
+          color: #111;
+        }
+        .retro-link:hover {
+          background: #fff;
+          color: #111;
+        }
+      `}</style>
+    </>
   );
 }

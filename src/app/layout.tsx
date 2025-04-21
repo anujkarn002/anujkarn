@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { orbitron, exo, roboto } from "../fonts";
 import "./globals.css";
+import { ThemeProvider } from "../components/ui/ThemeProvider";
+import { SiteLayout } from "../components/layout/SiteLayout";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,9 +28,21 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={[
+          geistSans.variable,
+          geistMono.variable,
+          orbitron.variable,
+          exo.variable,
+          roboto.variable,
+          "antialiased"
+        ].join(" ")}
       >
-        {children}
+        <ThemeProvider>
+          {/* Removed Cosmic3DScene and all celestial objects for now */}
+          <SiteLayout>
+            {children}
+          </SiteLayout>
+        </ThemeProvider>
       </body>
     </html>
   );
