@@ -59,7 +59,7 @@ export default function Home() {
             <a href="/resume/Anuj_Karn_Resume_01_04_2025.pdf" download className="text-white/70 hover:text-white transition text-2xl" title="Résumé"><FaFileAlt /></a>
           </div>
           <div className="flex flex-col gap-12 w-full max-w-2xl mt-8 mb-6">
-            {activities.length > 0 && (
+            {activities.length > 100 && (
               <section>
                 <h3 className="text-white text-base font-bold retro-section mb-4">Recent activities</h3>
                 <ul className="flex flex-col gap-4">

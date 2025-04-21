@@ -205,7 +205,7 @@ export const CosmicActivityTimeline = ({ flyToIndex, setFlyToIndex }: { flyToInd
       window.scrollTo({ top: y, behavior: "smooth" });
       if (setFlyToIndex) setFlyToIndex(progress);
     }
-  }, [progress]);
+  }, [progress, points, setFlyToIndex]);
 
   return (
     <>
