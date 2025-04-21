@@ -54,43 +54,45 @@ export default function Home() {
             Building elegant tools for humans and exploring the universe through code.
           </p>
           <div className="flex gap-3 items-center justify-center mb-8 mt-2">
-            <a href="https://github.com/anujkarn" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-white transition text-2xl" title="GitHub"><FaGithub /></a>
-            <a href="https://linkedin.com/in/anujkarn" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-white transition text-2xl" title="LinkedIn"><FaLinkedin /></a>
+            <a href="https://github.com/anujkarn002" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-white transition text-2xl" title="GitHub"><FaGithub /></a>
+            <a href="https://linkedin.com/in/anujkarn002" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-white transition text-2xl" title="LinkedIn"><FaLinkedin /></a>
             <a href="/resume/Anuj_Karn_Resume_01_04_2025.pdf" download className="text-white/70 hover:text-white transition text-2xl" title="Résumé"><FaFileAlt /></a>
           </div>
           <div className="flex flex-col gap-12 w-full max-w-2xl mt-8 mb-6">
-            <section>
-              <h3 className="text-white text-base font-bold retro-section mb-4">Recent activities</h3>
-              <ul className="flex flex-col gap-4">
-                {activities.slice(0, 4).map((item, i) => (
-                  <li key={i} className="text-base md:text-lg group hover:bg-white/5 transition rounded px-2 -mx-2 py-1 flex flex-col">
-                    <span className="flex items-center gap-2">
-                      {item.type === 'Post' ? (
-                        <FaRegFileAlt className="text-xs text-white/40" />
-                      ) : (
-                        <FaRegFolderOpen className="text-xs text-white/40" />
-                      )}
-                      <Link
-                        href={item.type === 'Post' ? `/posts/${item.id}` : `/projects/${item.id}`}
-                        className="block text-white underline-offset-2 group-hover:underline transition"
-                      >
-                        {item.title}
-                      </Link>
-                    </span>
-                    <span className="flex items-center gap-2 mt-0.5">
-                      <span className="inline-block bg-white/10 text-white/60 text-xs px-2 py-0.5 rounded">
-                        {item.type}
+            {activities.length > 0 && (
+              <section>
+                <h3 className="text-white text-base font-bold retro-section mb-4">Recent activities</h3>
+                <ul className="flex flex-col gap-4">
+                  {activities.slice(0, 4).map((item, i) => (
+                    <li key={i} className="text-base md:text-lg group hover:bg-white/5 transition rounded px-2 -mx-2 py-1 flex flex-col">
+                      <span className="flex items-center gap-2">
+                        {item.type === 'Post' ? (
+                          <FaRegFileAlt className="text-xs text-white/40" />
+                        ) : (
+                          <FaRegFolderOpen className="text-xs text-white/40" />
+                        )}
+                        <Link
+                          href={item.type === 'Post' ? `/posts/${item.id}` : `/projects/${item.id}`}
+                          className="block text-white underline-offset-2 group-hover:underline transition"
+                        >
+                          {item.title}
+                        </Link>
                       </span>
-                      <span className="text-xs text-white/50">{item.tags && item.tags.join(', ')}</span>
-                      <span className="text-xs text-white/30">{item.date}</span>
-                    </span>
-                  </li>
-                ))}
-              </ul>
-              <div className="mt-4 flex justify-end">
-                <Link href="/activity" className="retro-link text-xs px-4 py-1">See more</Link>
-              </div>
-            </section>
+                      <span className="flex items-center gap-2 mt-0.5">
+                        <span className="inline-block bg-white/10 text-white/60 text-xs px-2 py-0.5 rounded">
+                          {item.type}
+                        </span>
+                        <span className="text-xs text-white/50">{item.tags && item.tags.join(', ')}</span>
+                        <span className="text-xs text-white/30">{item.date}</span>
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+                <div className="mt-4 flex justify-end">
+                  <Link href="/activity" className="retro-link text-xs px-4 py-1">See more</Link>
+                </div>
+              </section>
+            )}
             <hr className="border-t border-white/10 my-8" />
             <section>
               <h3 className="text-white text-base font-bold retro-section mb-4">Skills</h3>
