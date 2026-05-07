@@ -7,7 +7,7 @@ import { useActivities } from "../hooks/useActivities";
 
 const experience = [
   {
-    position: "Full Stack Engineer",
+    position: "Senior Full Stack Engineer",
     company: "PivotX Advisors",
     location: "India",
     isRemote: true,
