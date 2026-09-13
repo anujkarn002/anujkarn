@@ -46,7 +46,7 @@ const components: PortableTextComponents = {
     image: ({ value }) => <PostFigure value={value} />,
     code: ({ value }) => (
       <figure className="my-8 mx-0">
-        {(value.filename || value.language) && (
+        {(value.filename || (value.language && value.language !== "text")) && (
           <figcaption className="label mb-2">{value.filename || value.language}</figcaption>
         )}
         <pre>

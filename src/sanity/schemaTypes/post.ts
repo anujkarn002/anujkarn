@@ -75,7 +75,7 @@ export default defineType({
           ],
         },
         { type: "image", options: { hotspot: true }, fields: imageFields },
-        { type: "code", options: { withFilename: true } },
+        { type: "code" },
       ],
     }),
   ],
