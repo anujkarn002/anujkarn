@@ -3,7 +3,7 @@ import type { Mode } from "../../lib/mode";
 import { site } from "../../lib/site";
 import { OrbitFigure } from "./Figures";
 
-const previous = site.experience.filter((e) => !e.current).map((e) => e.company.split(" ")[0]);
+const previous = site.experience.filter((e) => !e.current).map((e) => e.company);
 
 export default function Hero({ mode }: { mode: Mode }) {
   if (mode === "instrument") {

@@ -28,7 +28,7 @@ export default function Field({ mode, images, standalone = false }: { mode: Mode
   if (mode === "workshop") {
     return (
       <section className="px-6 py-10 flex flex-col gap-5" style={{ background: "var(--bg)", borderBottom: "1px solid var(--line)" }}>
-        <div className="label">§ 03 — {heading}</div>
+        <div className="label">§ 04 — {heading}</div>
         <div style={{ border: "1px solid var(--line)", background: "var(--line)" }}>
           <FieldGrid images={shown} columns={standalone ? "grid-cols-2 md:grid-cols-4" : "grid-cols-2 md:grid-cols-4"} gap={1} />
         </div>

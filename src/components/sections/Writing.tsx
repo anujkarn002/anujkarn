@@ -35,7 +35,7 @@ export default function Writing({ mode, posts, standalone = false }: { mode: Mod
   if (mode === "workshop") {
     return (
       <section className="px-6 py-10 flex flex-col gap-5" style={{ background: "var(--bg)", borderBottom: "1px solid var(--line)" }}>
-        <div className="label">§ 02 — {heading}</div>
+        <div className="label">§ 03 — {heading}</div>
         {posts.map((p) => (
           <Link key={p._id} href={`/writing/${p.slug}`} className="flex justify-between gap-6 items-baseline hover:text-accent transition-colors">
             <span className="display" style={{ fontSize: 22, letterSpacing: "-0.02em", fontWeight: 800 }}>{p.title}</span>

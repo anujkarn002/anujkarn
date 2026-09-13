@@ -46,7 +46,7 @@ export default function Contact({ mode, full = false }: { mode: Mode; full?: boo
   if (mode === "workshop") {
     return (
       <section className="px-6 pt-14 pb-16 flex flex-col gap-6" style={{ background: "var(--bg)" }}>
-        <div className="label">§ 04 — Contact</div>
+        <div className="label">§ 05 — Contact</div>
         {full ? (
           <NoteComposer mode={mode} />
         ) : (
