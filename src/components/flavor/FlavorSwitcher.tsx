@@ -1,21 +1,21 @@
 "use client";
-import { MODES, MODE_LABELS, type Mode } from "../../lib/mode";
-import { useMode } from "./ModeProvider";
+import { FLAVORS, FLAVOR_LABELS, type Flavor } from "../../lib/flavor";
+import { useFlavor } from "./FlavorProvider";
 
-export default function ModeSwitcher() {
-  const { mode, setMode, switching } = useMode();
+export default function FlavorSwitcher() {
+  const { flavor, setFlavor, switching } = useFlavor();
 
   return (
     <label className="relative inline-flex items-center gap-2 cursor-pointer">
       <span className="label hidden sm:inline" style={{ color: "var(--faint)" }}>
-        Mode
+        Flavor
       </span>
       <span className="relative inline-flex items-center">
         <select
-          value={mode}
+          value={flavor}
           disabled={switching}
-          onChange={(e) => setMode(e.target.value as Mode)}
-          aria-label="Design mode"
+          onChange={(e) => setFlavor(e.target.value as Flavor)}
+          aria-label="Design flavor"
           className="label appearance-none cursor-pointer disabled:cursor-wait"
           style={{
             color: "var(--fg)",
@@ -26,9 +26,9 @@ export default function ModeSwitcher() {
             outline: "none",
           }}
         >
-          {MODES.map((m) => (
+          {FLAVORS.map((m) => (
             <option key={m} value={m} style={{ background: "var(--bg)", color: "var(--fg)" }}>
-              {MODE_LABELS[m].short} — {MODE_LABELS[m].name}
+              {FLAVOR_LABELS[m].short} — {FLAVOR_LABELS[m].name}
             </option>
           ))}
         </select>

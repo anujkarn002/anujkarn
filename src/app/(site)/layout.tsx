@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import "../globals.css";
 import { fontVariables } from "../../fonts";
-import { getMode } from "../../lib/mode.server";
+import { getFlavor } from "../../lib/flavor.server";
+import { getThemeChoice } from "../../lib/theme.server";
+import { resolveTheme } from "../../lib/theme";
 import { getSite } from "../../sanity/lib/queries";
-import { ModeProvider } from "../../components/mode/ModeProvider";
+import { FlavorProvider } from "../../components/flavor/FlavorProvider";
 import Nav from "../../components/sections/Nav";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -15,15 +17,16 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const [mode, site] = await Promise.all([getMode(), getSite()]);
+  const [flavor, themeChoice, site] = await Promise.all([getFlavor(), getThemeChoice(), getSite()]);
+  const theme = resolveTheme(flavor, themeChoice);
 
   return (
-    <html lang="en" data-mode={mode} className={fontVariables}>
+    <html lang="en" data-flavor={flavor} data-theme={theme} className={fontVariables}>
       <body>
-        <ModeProvider initialMode={mode}>
-          <Nav mode={mode} site={site} />
+        <FlavorProvider initialFlavor={flavor} initialThemeChoice={themeChoice}>
+          <Nav flavor={flavor} site={site} />
           <main>{children}</main>
-        </ModeProvider>
+        </FlavorProvider>
       </body>
     </html>
   );

@@ -1,16 +1,16 @@
 import Link from "next/link";
-import type { Mode } from "../../lib/mode";
+import type { Flavor } from "../../lib/flavor";
 import type { Photo } from "../../sanity/lib/queries";
 import FieldGrid from "./FieldGrid";
 import { NAV_LABELS } from "./Nav";
 
-export default function Field({ mode, photos, standalone = false }: { mode: Mode; photos: Photo[]; standalone?: boolean }) {
+export default function Field({ flavor, photos, standalone = false }: { flavor: Flavor; photos: Photo[]; standalone?: boolean }) {
   if (photos.length === 0) return null;
-  const heading = NAV_LABELS[mode].field;
-  const shown = standalone ? photos : photos.slice(0, mode === "workshop" ? 4 : 6);
+  const heading = NAV_LABELS[flavor].field;
+  const shown = standalone ? photos : photos.slice(0, flavor === "workshop" ? 4 : 6);
   const more = !standalone && photos.length > shown.length;
 
-  if (mode === "instrument") {
+  if (flavor === "instrument") {
     return (
       <section className={`gutter ${standalone ? "pt-16" : "pt-[120px]"}`}>
         <div className="grid grid-cols-1 md:grid-cols-12 gap-x-6 gap-y-6">
@@ -28,7 +28,7 @@ export default function Field({ mode, photos, standalone = false }: { mode: Mode
     );
   }
 
-  if (mode === "workshop") {
+  if (flavor === "workshop") {
     return (
       <section className="px-6 py-10 flex flex-col gap-5" style={{ background: "var(--bg)", borderBottom: "1px solid var(--line)" }}>
         <div className="label">§ 04 — {heading}</div>

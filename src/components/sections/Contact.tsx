@@ -1,5 +1,5 @@
 import Link from "next/link";
-import type { Mode } from "../../lib/mode";
+import type { Flavor } from "../../lib/flavor";
 import type { SiteContent } from "../../lib/site";
 import NoteComposer from "./NoteComposer";
 
@@ -14,8 +14,8 @@ function Socials({ site, vertical = false }: { site: SiteContent; vertical?: boo
   );
 }
 
-export default function Contact({ mode, site, full = false }: { mode: Mode; site: SiteContent; full?: boolean }) {
-  if (mode === "instrument") {
+export default function Contact({ flavor, site, full = false }: { flavor: Flavor; site: SiteContent; full?: boolean }) {
+  if (flavor === "instrument") {
     return (
       <section className={`gutter ${full ? "pt-16" : "pt-[140px]"} pb-16`}>
         <div className="grid grid-cols-1 md:grid-cols-12 gap-x-6 gap-y-10 items-end">
@@ -35,7 +35,7 @@ export default function Contact({ mode, site, full = false }: { mode: Mode; site
           </div>
           {full && (
             <div className="md:col-span-8 mt-6">
-              <NoteComposer mode={mode} email={site.email} />
+              <NoteComposer flavor={flavor} email={site.email} />
             </div>
           )}
         </div>
@@ -43,12 +43,12 @@ export default function Contact({ mode, site, full = false }: { mode: Mode; site
     );
   }
 
-  if (mode === "workshop") {
+  if (flavor === "workshop") {
     return (
       <section className="px-6 pt-14 pb-16 flex flex-col gap-6" style={{ background: "var(--bg)" }}>
         <div className="label">§ 05 — Contact</div>
         {full ? (
-          <NoteComposer mode={mode} email={site.email} />
+          <NoteComposer flavor={flavor} email={site.email} />
         ) : (
           <div style={{ fontFamily: "var(--font-mono)", fontSize: 22, lineHeight: 1.5 }}>
             <span style={{ color: "var(--accent)" }}>$</span> mail {site.email}
@@ -73,7 +73,7 @@ export default function Contact({ mode, site, full = false }: { mode: Mode; site
       <Socials site={site} />
       {full && (
         <div className="mt-6">
-          <NoteComposer mode={mode} email={site.email} />
+          <NoteComposer flavor={flavor} email={site.email} />
         </div>
       )}
       {!full && (

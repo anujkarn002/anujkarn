@@ -1,20 +1,20 @@
-import type { Mode } from "../../lib/mode";
+import type { Flavor } from "../../lib/flavor";
 import type { SiteContent, ExperienceItem } from "../../lib/site";
 
 export default function Experience({
-  mode,
+  flavor,
   site,
   experience,
   standalone = false,
 }: {
-  mode: Mode;
+  flavor: Flavor;
   site: SiteContent;
   experience: ExperienceItem[];
   standalone?: boolean;
 }) {
   const education = { school: site.school, degree: site.degree, years: site.educationYears };
   if (experience.length === 0) return null;
-  if (mode === "instrument") {
+  if (flavor === "instrument") {
     return (
       <section className={`gutter ${standalone ? "pt-16" : "pt-[120px]"}`}>
         <div className="grid grid-cols-1 md:grid-cols-12 gap-x-6 gap-y-6">
@@ -63,7 +63,7 @@ export default function Experience({
     );
   }
 
-  if (mode === "workshop") {
+  if (flavor === "workshop") {
     const cols = "180px minmax(0,1fr) minmax(0,1.4fr) 200px";
     return (
       <section style={{ background: "var(--bg)", borderTop: standalone ? undefined : "1px solid var(--line)" }}>

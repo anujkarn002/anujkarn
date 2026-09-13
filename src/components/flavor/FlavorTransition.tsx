@@ -9,7 +9,7 @@ const BARS: [string, string][] = [
   ["30%", "18px"],
 ];
 
-export default function ModeTransition({ active, label }: { active: boolean; label: string }) {
+export default function FlavorTransition({ active, label }: { active: boolean; label: string }) {
   const [mounted, setMounted] = useState(active);
 
   useEffect(() => {

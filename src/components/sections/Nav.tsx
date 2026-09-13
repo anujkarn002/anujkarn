@@ -1,16 +1,17 @@
 import Link from "next/link";
-import type { Mode } from "../../lib/mode";
+import type { Flavor } from "../../lib/flavor";
 import type { SiteContent } from "../../lib/site";
-import ModeSwitcher from "../mode/ModeSwitcher";
+import FlavorSwitcher from "../flavor/FlavorSwitcher";
+import ThemeToggle from "../flavor/ThemeToggle";
 
-export const NAV_LABELS: Record<Mode, { work: string; writing: string; field: string; contact: string }> = {
+export const NAV_LABELS: Record<Flavor, { work: string; writing: string; field: string; contact: string }> = {
   instrument: { work: "Work", writing: "Notes", field: "Field", contact: "Contact" },
   deepfield: { work: "Work", writing: "Writing", field: "Field", contact: "Contact" },
   workshop: { work: "Index", writing: "Log", field: "Bench", contact: "Contact" },
 };
 
-function Links({ mode }: { mode: Mode }) {
-  const l = NAV_LABELS[mode];
+function Links({ flavor }: { flavor: Flavor }) {
+  const l = NAV_LABELS[flavor];
   return (
     <nav style={{ display: "flex", gap: "clamp(16px, 2.5vw, 32px)" }}>
       <Link className="label" style={{ color: "var(--fg)" }} href="/work">{l.work}</Link>
@@ -21,13 +22,13 @@ function Links({ mode }: { mode: Mode }) {
   );
 }
 
-export default function Nav({ mode, site }: { mode: Mode; site: SiteContent }) {
+export default function Nav({ flavor, site }: { flavor: Flavor; site: SiteContent }) {
   const initials = site.name
     .split(" ")
     .map((w) => w[0])
     .join(". ");
 
-  if (mode === "instrument") {
+  if (flavor === "instrument") {
     return (
       <header className="gutter pt-7">
         <div className="grid grid-cols-2 md:grid-cols-12 gap-x-6 gap-y-3 items-baseline">
@@ -37,8 +38,9 @@ export default function Nav({ mode, site }: { mode: Mode; site: SiteContent }) {
           <div className="label hidden md:block md:col-span-3">Sheet 01 / Index</div>
           <div className="label hidden md:block md:col-span-3">{site.location}</div>
           <div className="col-span-2 md:col-span-3 flex items-center justify-between md:justify-end gap-6">
-            <Links mode={mode} />
-            <ModeSwitcher />
+            <Links flavor={flavor} />
+            <FlavorSwitcher />
+            <ThemeToggle />
           </div>
         </div>
         <div className="rule mt-5" />
@@ -46,7 +48,7 @@ export default function Nav({ mode, site }: { mode: Mode; site: SiteContent }) {
     );
   }
 
-  if (mode === "workshop") {
+  if (flavor === "workshop") {
     return (
       <header className="grid grid-cols-2 md:grid-cols-4" style={{ borderBottom: "1px solid var(--line)", background: "var(--bg)" }}>
         <Link href="/" className="label px-6 py-4" style={{ color: "var(--fg)", borderRight: "1px solid var(--line)" }}>
@@ -59,8 +61,9 @@ export default function Nav({ mode, site }: { mode: Mode; site: SiteContent }) {
           {site.coordinates}
         </div>
         <div className="px-6 py-3 flex items-center justify-end gap-6">
-          <Links mode={mode} />
-          <ModeSwitcher />
+          <Links flavor={flavor} />
+          <FlavorSwitcher />
+            <ThemeToggle />
         </div>
       </header>
     );
@@ -73,8 +76,9 @@ export default function Nav({ mode, site }: { mode: Mode; site: SiteContent }) {
         {site.name.split(" ").slice(-1)[0]}
       </Link>
       <div className="flex items-center gap-6">
-        <Links mode={mode} />
-        <ModeSwitcher />
+        <Links flavor={flavor} />
+        <FlavorSwitcher />
+            <ThemeToggle />
       </div>
     </header>
   );

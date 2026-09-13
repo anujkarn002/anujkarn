@@ -1,4 +1,4 @@
-import { getMode } from "../../lib/mode.server";
+import { getFlavor } from "../../lib/flavor.server";
 import { getSite, getExperience, getProjects, getAllPosts, getPhotos } from "../../sanity/lib/queries";
 import Hero from "../../components/sections/Hero";
 import Work from "../../components/sections/Work";
@@ -8,8 +8,8 @@ import Field from "../../components/sections/Field";
 import Contact from "../../components/sections/Contact";
 
 export default async function Home() {
-  const [mode, site, experience, projects, posts, photos] = await Promise.all([
-    getMode(),
+  const [flavor, site, experience, projects, posts, photos] = await Promise.all([
+    getFlavor(),
     getSite(),
     getExperience(),
     getProjects(),
@@ -19,12 +19,12 @@ export default async function Home() {
 
   return (
     <>
-      <Hero mode={mode} site={site} experience={experience} />
-      <Work mode={mode} projects={projects} />
-      <Experience mode={mode} site={site} experience={experience} />
-      <Writing mode={mode} posts={posts.slice(0, 3)} />
-      <Field mode={mode} photos={photos} />
-      <Contact mode={mode} site={site} />
+      <Hero flavor={flavor} site={site} experience={experience} />
+      <Work flavor={flavor} projects={projects} />
+      <Experience flavor={flavor} site={site} experience={experience} />
+      <Writing flavor={flavor} posts={posts.slice(0, 3)} />
+      <Field flavor={flavor} photos={photos} />
+      <Contact flavor={flavor} site={site} />
     </>
   );
 }

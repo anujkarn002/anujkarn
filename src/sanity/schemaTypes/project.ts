@@ -36,7 +36,7 @@ export default defineType({
       title: "Cover image",
       type: "image",
       options: { hotspot: true },
-      description: "Used for the tiles in Deep Field mode and at the top of the project page.",
+      description: "Used for the tiles in Deep Field flavor and at the top of the project page.",
     }),
     defineField({ name: "order", type: "number", description: "Lower numbers come first." }),
   ],

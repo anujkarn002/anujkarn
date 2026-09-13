@@ -1,57 +1,79 @@
 @import "tailwindcss";
 
-/* ---------- Mode tokens: each mode is a distinct system, not a palette swap ---------- */
+/* ---------- Flavor tokens ----------
+   Each flavor is a distinct system (type, spacing, composition); each has a
+   light and a dark palette. The flavor sets fonts and layout tokens; the
+   theme sets colours. Defaults below are the flavor's native theme. */
 
 :root,
-[data-mode="deepfield"] {
-  --bg: #0b0b0d;
-  --fg: #e9e6df;
-  --muted: #b8b3a6;
-  --faint: #7d7970;
-  --line: #232327;
-  --line-strong: #4a4740;
-  --accent: #e9e6df;
-  --surface: #121215;
+[data-flavor="deepfield"] {
   --font-display: var(--font-newsreader), Georgia, serif;
   --font-body: var(--font-newsreader), Georgia, serif;
   --font-mono: var(--font-jetbrains-mono), Menlo, monospace;
   --display-weight: 300;
   --gutter: clamp(20px, 4.5vw, 64px);
-  color-scheme: dark;
 }
-
-[data-mode="instrument"] {
-  --bg: #f3f1ec;
-  --fg: #15150f;
-  --muted: #3a3830;
-  --faint: #6b675d;
-  --line: #c9c5ba;
-  --line-strong: #15150f;
-  --accent: #7a3b1e;
-  --surface: #e9e6de;
+[data-flavor="instrument"] {
   --font-display: var(--font-instrument-serif), Georgia, serif;
   --font-body: var(--font-instrument-sans), "Helvetica Neue", Arial, sans-serif;
   --font-mono: var(--font-plex-mono), Menlo, monospace;
   --display-weight: 400;
   --gutter: clamp(20px, 4vw, 56px);
-  color-scheme: light;
 }
-
-[data-mode="workshop"] {
-  --bg: #17181a;
-  --fg: #e6e3dc;
-  --muted: #b5b2aa;
-  --faint: #8d8a82;
-  --line: #2c2d31;
-  --line-strong: #3a3b40;
-  --accent: #c9a45c;
-  --surface: #1d1e21;
+[data-flavor="workshop"] {
   --font-display: var(--font-archivo), "Helvetica Neue", Arial, sans-serif;
   --font-body: var(--font-archivo), "Helvetica Neue", Arial, sans-serif;
   --font-mono: var(--font-space-mono), Menlo, monospace;
   --display-weight: 900;
   --gutter: 24px;
+}
+
+/* Deep Field — dark (native): near-black, bone type */
+:root,
+[data-flavor="deepfield"][data-theme="dark"] {
+  --bg: #0b0b0d; --fg: #e9e6df; --muted: #b8b3a6; --faint: #7d7970;
+  --line: #232327; --line-strong: #4a4740; --accent: #e9e6df; --surface: #121215;
+  --tile-a: #1a1a1e; --tile-b: #0f0f12;
+  --grain: rgba(255, 255, 255, 0.04);
   color-scheme: dark;
+}
+/* Deep Field — light: gallery white, ink type */
+[data-flavor="deepfield"][data-theme="light"] {
+  --bg: #f4f3ef; --fg: #131315; --muted: #4b4946; --faint: #807c74;
+  --line: #dedbd4; --line-strong: #aaa69d; --accent: #131315; --surface: #ebe9e4;
+  --tile-a: #e6e4de; --tile-b: #d9d6cf;
+  --grain: rgba(0, 0, 0, 0.035);
+  color-scheme: light;
+}
+
+/* Instrument — light (native): warm paper, ink */
+[data-flavor="instrument"][data-theme="light"] {
+  --bg: #f3f1ec; --fg: #15150f; --muted: #3a3830; --faint: #6b675d;
+  --line: #c9c5ba; --line-strong: #15150f; --accent: #7a3b1e; --surface: #e9e6de;
+  --tile-a: #e9e6de; --tile-b: #ddd9cf;
+  color-scheme: light;
+}
+/* Instrument — dark: blackboard, chalk */
+[data-flavor="instrument"][data-theme="dark"] {
+  --bg: #15140f; --fg: #ece8dd; --muted: #c2bcae; --faint: #8a8577;
+  --line: #34322a; --line-strong: #ece8dd; --accent: #d9905f; --surface: #1e1c16;
+  --tile-a: #201e18; --tile-b: #17160f;
+  color-scheme: dark;
+}
+
+/* Workshop — dark (native): charcoal, brass */
+[data-flavor="workshop"][data-theme="dark"] {
+  --bg: #17181a; --fg: #e6e3dc; --muted: #b5b2aa; --faint: #8d8a82;
+  --line: #2c2d31; --line-strong: #3a3b40; --accent: #c9a45c; --surface: #1d1e21;
+  --tile-a: #1f2023; --tile-b: #17181a;
+  color-scheme: dark;
+}
+/* Workshop — light: concrete, graphite, darker brass */
+[data-flavor="workshop"][data-theme="light"] {
+  --bg: #e8e6e1; --fg: #17181a; --muted: #494a4e; --faint: #6e6f73;
+  --line: #d0cec7; --line-strong: #b3b1aa; --accent: #8f6a20; --surface: #dedcd6;
+  --tile-a: #dedcd6; --tile-b: #cfcdc6;
+  color-scheme: light;
 }
 
 @theme inline {
@@ -121,15 +143,15 @@ a {
 }
 
 /* Workshop-only: the drafting grid behind everything */
-[data-mode="workshop"] body {
+[data-flavor="workshop"] body {
   background-image: linear-gradient(var(--line) 1px, transparent 1px),
     linear-gradient(90deg, var(--line) 1px, transparent 1px);
   background-size: 48px 48px;
 }
 
 /* Deep Field-only: paper grain */
-[data-mode="deepfield"] body {
-  background-image: radial-gradient(rgba(255, 255, 255, 0.04) 0.6px, transparent 0.7px);
+[data-flavor="deepfield"] body {
+  background-image: radial-gradient(var(--grain) 0.6px, transparent 0.7px);
   background-size: 3px 3px;
 }
 
@@ -140,8 +162,8 @@ a {
   line-height: 1.65;
   color: var(--muted);
 }
-[data-mode="instrument"] .post-body { font-size: 18px; }
-[data-mode="workshop"] .post-body { font-size: 17px; font-weight: 500; }
+[data-flavor="instrument"] .post-body { font-size: 18px; }
+[data-flavor="workshop"] .post-body { font-size: 17px; font-weight: 500; }
 
 .post-body :is(h1, h2, h3) {
   font-family: var(--font-display);
@@ -205,7 +227,7 @@ a {
   animation: blink 1s steps(1) infinite;
 }
 
-/* ---------- Mode-switch overlay ---------- */
+/* ---------- Flavor-switch overlay ---------- */
 
 @keyframes shimmer {
   0% { opacity: 0.35; }
@@ -218,7 +240,7 @@ a {
   opacity: 0.4;
   animation: shimmer 1.4s ease-in-out infinite;
 }
-[data-mode="instrument"] .skeleton { opacity: 0.12; }
+[data-theme="light"] .skeleton { opacity: 0.12; }
 
 @keyframes spin {
   to { transform: rotate(360deg); }

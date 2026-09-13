@@ -1,12 +1,12 @@
 import Link from "next/link";
-import type { Mode } from "../../lib/mode";
+import type { Flavor } from "../../lib/flavor";
 import type { SiteContent, ExperienceItem } from "../../lib/site";
 import { OrbitFigure } from "./Figures";
 
-export default function Hero({ mode, site, experience }: { mode: Mode; site: SiteContent; experience: ExperienceItem[] }) {
+export default function Hero({ flavor, site, experience }: { flavor: Flavor; site: SiteContent; experience: ExperienceItem[] }) {
   const previous = experience.filter((e) => !e.current).map((e) => e.company);
 
-  if (mode === "instrument") {
+  if (flavor === "instrument") {
     return (
       <section className="gutter pt-16 md:pt-[72px]">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-x-6 gap-y-12">
@@ -39,7 +39,7 @@ export default function Hero({ mode, site, experience }: { mode: Mode; site: Sit
     );
   }
 
-  if (mode === "workshop") {
+  if (flavor === "workshop") {
     const lines = site.headlineWorkshop.split("\n").filter(Boolean);
     const stack = site.stack.slice(0, 9);
     const rows = [stack.slice(0, 3), stack.slice(3, 6), stack.slice(6, 9)].filter((r) => r.length);

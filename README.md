@@ -1,4 +1,4 @@
-This is the source for [anujkarn.dev](https://anujkarn.dev) — a [Next.js](https://nextjs.org) (App Router) site with three switchable design modes, all content (bio, experience, projects, posts, photographs) managed in Sanity Studio, and a Discord-connected contact form.
+This is the source for [anujkarn.dev](https://anujkarn.dev) — a [Next.js](https://nextjs.org) (App Router) site with three switchable design flavors, all content (bio, experience, projects, posts, photographs) managed in Sanity Studio, and a Discord-connected contact form.
 
 ## Getting started
 
@@ -27,7 +27,7 @@ All of these are read from environment variables at runtime — see `.env.local.
 - **Blog**: Sanity Studio embedded at `/studio`; posts are queried server-side via GROQ (`src/sanity/lib/queries.ts`) and rendered at `/writing` and `/writing/[slug]`.
 - **Photographs**: `photo` documents in Sanity, served through the Sanity image CDN at `/field`.
 - **Everything else**: a `settings` singleton plus `project` and `experience` documents in Sanity, with code fallbacks in `src/lib/site.ts` and `src/lib/projects.ts` used only when a document is missing.
-- **Design modes**: three distinct layouts (Instrument, Deep Field, Workshop) selected by a `design-mode` cookie and rendered server-side — see `src/lib/mode.ts` and `src/components/sections/*`.
+- **Design flavors**: three distinct layouts (Instrument, Deep Field, Workshop) selected by a `design-flavor` cookie and rendered server-side — see `src/lib/flavor.ts` and `src/components/sections/*`.
 - **Contact**: `/contact` posts to `/api/contact`, which relays to the Discord webhook and logs a durable copy to Neon (`contact_messages` table).
 
 ## Learn more

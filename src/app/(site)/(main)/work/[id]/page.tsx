@@ -1,23 +1,23 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import { getMode } from "../../../../../lib/mode.server";
+import { getFlavor } from "../../../../../lib/flavor.server";
 import { getSite, getProjects } from "../../../../../sanity/lib/queries";
 import Contact from "../../../../../components/sections/Contact";
 
 export default async function ProjectPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  const [mode, site, projects] = await Promise.all([getMode(), getSite(), getProjects()]);
+  const [flavor, site, projects] = await Promise.all([getFlavor(), getSite(), getProjects()]);
   const index = projects.findIndex((p) => p.id === id);
   if (index === -1) notFound();
   const project = projects[index];
 
-  const label = mode === "workshop" ? `§ 01 — No. ${String(index + 1).padStart(3, "0")}` : `Work ${String(index + 1).padStart(2, "0")}`;
-  const light = mode === "deepfield" ? 300 : undefined;
+  const label = flavor === "workshop" ? `§ 01 — No. ${String(index + 1).padStart(3, "0")}` : `Work ${String(index + 1).padStart(2, "0")}`;
+  const light = flavor === "deepfield" ? 300 : undefined;
 
   return (
     <>
-      <article className={`${mode === "workshop" ? "px-6" : "gutter"} pt-16 md:pt-24`}>
+      <article className={`${flavor === "workshop" ? "px-6" : "gutter"} pt-16 md:pt-24`}>
         <div className="grid grid-cols-1 md:grid-cols-12 gap-x-6 gap-y-8">
           <div className="md:col-span-3 flex flex-col gap-1.5">
             <div className="label">{label}</div>
@@ -26,11 +26,11 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
           </div>
           <div className="md:col-span-8 flex flex-col gap-8">
             <h1
-              className={`display m-0 ${mode === "workshop" ? "uppercase" : ""}`}
+              className={`display m-0 ${flavor === "workshop" ? "uppercase" : ""}`}
               style={{
                 fontSize: "clamp(44px, 6.5vw, 96px)",
                 lineHeight: 0.95,
-                letterSpacing: mode === "workshop" ? "-0.045em" : "-0.03em",
+                letterSpacing: flavor === "workshop" ? "-0.045em" : "-0.03em",
                 textWrap: "balance",
               }}
             >
@@ -71,7 +71,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
           </div>
         </div>
       </article>
-      <Contact mode={mode} site={site} />
+      <Contact flavor={flavor} site={site} />
     </>
   );
 }

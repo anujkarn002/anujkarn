@@ -1,11 +1,11 @@
 import Link from "next/link";
 import Image from "next/image";
-import type { Mode } from "../../lib/mode";
+import type { Flavor } from "../../lib/flavor";
 import type { Project } from "../../lib/projects";
 import { ArmFigure } from "./Figures";
 
-export default function Work({ mode, projects, standalone = false }: { mode: Mode; projects: Project[]; standalone?: boolean }) {
-  if (mode === "instrument") {
+export default function Work({ flavor, projects, standalone = false }: { flavor: Flavor; projects: Project[]; standalone?: boolean }) {
+  if (flavor === "instrument") {
     return (
       <section className={`gutter ${standalone ? "pt-16" : "pt-[120px]"}`}>
         <div className="grid grid-cols-1 md:grid-cols-12 gap-x-6 gap-y-6">
@@ -38,7 +38,7 @@ export default function Work({ mode, projects, standalone = false }: { mode: Mod
     );
   }
 
-  if (mode === "workshop") {
+  if (flavor === "workshop") {
     const cols = "80px minmax(0,1.2fr) minmax(0,1.4fr) 200px 100px";
     return (
       <section style={{ background: "var(--bg)" }}>
@@ -115,7 +115,7 @@ export default function Work({ mode, projects, standalone = false }: { mode: Mod
               className="relative overflow-hidden"
               style={{
                 aspectRatio: ratios[i % ratios.length],
-                background: "linear-gradient(160deg, #1a1a1e, #0f0f12)",
+                background: "linear-gradient(160deg, var(--tile-a), var(--tile-b))",
                 border: "1px solid var(--line)",
               }}
             >

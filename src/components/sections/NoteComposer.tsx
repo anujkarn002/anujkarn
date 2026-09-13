@@ -1,10 +1,10 @@
 "use client";
 import { useState } from "react";
-import type { Mode } from "../../lib/mode";
+import type { Flavor } from "../../lib/flavor";
 
 type Status = "idle" | "sending" | "sent" | "error";
 
-export default function NoteComposer({ mode, email }: { mode: Mode; email: string }) {
+export default function NoteComposer({ flavor, email }: { flavor: Flavor; email: string }) {
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState("");
   const [from, setFrom] = useState("");
@@ -34,7 +34,7 @@ export default function NoteComposer({ mode, email }: { mode: Mode; email: strin
     }
   }
 
-  const mono = { fontFamily: "var(--font-mono)", fontSize: mode === "workshop" ? 16 : 14, color: "var(--fg)" } as const;
+  const mono = { fontFamily: "var(--font-mono)", fontSize: flavor === "workshop" ? 16 : 14, color: "var(--fg)" } as const;
   const field = {
     ...mono,
     background: "transparent",
@@ -48,7 +48,7 @@ export default function NoteComposer({ mode, email }: { mode: Mode; email: strin
   if (status === "sent") {
     return (
       <p style={mono} className="m-0">
-        {mode === "workshop" ? "> sent. I'll read it." : "Sent — I'll read it."}
+        {flavor === "workshop" ? "> sent. I'll read it." : "Sent — I'll read it."}
       </p>
     );
   }
@@ -61,7 +61,7 @@ export default function NoteComposer({ mode, email }: { mode: Mode; email: strin
         send();
       }}
     >
-      {mode === "workshop" && (
+      {flavor === "workshop" && (
         <div style={{ ...mono, color: "var(--faint)" }}>
           <span style={{ color: "var(--accent)" }}>$</span> mail {email}
           <br />
@@ -70,7 +70,7 @@ export default function NoteComposer({ mode, email }: { mode: Mode; email: strin
       )}
       <input
         style={field}
-        placeholder={mode === "workshop" ? "> your email" : "Your email"}
+        placeholder={flavor === "workshop" ? "> your email" : "Your email"}
         value={from}
         onChange={(e) => setFrom(e.target.value)}
         type="email"
@@ -79,7 +79,7 @@ export default function NoteComposer({ mode, email }: { mode: Mode; email: strin
       />
       <textarea
         style={{ ...field, resize: "none", minHeight: 96 }}
-        placeholder={mode === "workshop" ? "> note" : "A note"}
+        placeholder={flavor === "workshop" ? "> note" : "A note"}
         value={note}
         onChange={(e) => setNote(e.target.value)}
         required
@@ -87,7 +87,7 @@ export default function NoteComposer({ mode, email }: { mode: Mode; email: strin
       />
       <div className="flex items-center gap-6">
         <button type="submit" disabled={status === "sending"} className="label disabled:opacity-50" style={{ color: "var(--fg)", borderBottom: "1px solid var(--fg)", paddingBottom: 3 }}>
-          {status === "sending" ? "Sending…" : mode === "workshop" ? "Send ↵" : "Send"}
+          {status === "sending" ? "Sending…" : flavor === "workshop" ? "Send ↵" : "Send"}
         </button>
         {status === "error" && <span className="label" style={{ color: "var(--accent)" }}>{error}</span>}
       </div>

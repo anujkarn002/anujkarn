@@ -19,7 +19,7 @@ export default defineType({
       name: "coordinates",
       type: "string",
       group: "identity",
-      description: "Shown in the Workshop mode nav, e.g. 28.6139° N, 77.2090° E",
+      description: "Shown in the Workshop flavor nav, e.g. 28.6139° N, 77.2090° E",
     }),
     defineField({
       name: "summary",
@@ -27,11 +27,11 @@ export default defineType({
       type: "text",
       rows: 3,
       group: "identity",
-      description: "Follows your title on the home page in every mode.",
+      description: "Follows your title on the home page in every flavor.",
     }),
     defineField({
       name: "stack",
-      title: "Stack (Workshop mode panel)",
+      title: "Stack (Workshop flavor panel)",
       type: "array",
       of: [{ type: "string" }],
       group: "identity",
