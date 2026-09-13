@@ -8,7 +8,8 @@ export function getClient(): SanityClient {
     throw new Error("Sanity is not configured — check isSanityConfigured before calling getClient()");
   }
   if (!cached) {
-    cached = createClient({ projectId, dataset, apiVersion, useCdn: true });
+    // No CDN: edits in the Studio should show on the next request, not a minute later.
+    cached = createClient({ projectId, dataset, apiVersion, useCdn: false });
   }
   return cached;
 }

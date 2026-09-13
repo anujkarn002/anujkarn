@@ -1,0 +1,91 @@
+import { defineField, defineType } from "sanity";
+
+export default defineType({
+  name: "settings",
+  title: "Site settings",
+  type: "document",
+  groups: [
+    { name: "identity", title: "Identity", default: true },
+    { name: "copy", title: "Headlines & copy" },
+    { name: "links", title: "Links & files" },
+    { name: "education", title: "Education" },
+  ],
+  fields: [
+    defineField({ name: "name", type: "string", group: "identity", validation: (r) => r.required() }),
+    defineField({ name: "role", title: "Current title", type: "string", group: "identity" }),
+    defineField({ name: "company", title: "Current company", type: "string", group: "identity" }),
+    defineField({ name: "location", title: "City", type: "string", group: "identity" }),
+    defineField({
+      name: "coordinates",
+      type: "string",
+      group: "identity",
+      description: "Shown in the Workshop mode nav, e.g. 28.6139° N, 77.2090° E",
+    }),
+    defineField({
+      name: "summary",
+      title: "One-paragraph summary",
+      type: "text",
+      rows: 3,
+      group: "identity",
+      description: "Follows your title on the home page in every mode.",
+    }),
+    defineField({
+      name: "stack",
+      title: "Stack (Workshop mode panel)",
+      type: "array",
+      of: [{ type: "string" }],
+      group: "identity",
+      options: { layout: "tags" },
+      description: "Short lowercase tokens, first nine are shown.",
+    }),
+
+    defineField({
+      name: "headlineInstrument",
+      title: "Headline — Instrument (A)",
+      type: "text",
+      rows: 2,
+      group: "copy",
+    }),
+    defineField({
+      name: "headlineDeepfield",
+      title: "Headline — Deep Field (B)",
+      type: "text",
+      rows: 2,
+      group: "copy",
+    }),
+    defineField({
+      name: "headlineWorkshop",
+      title: "Headline — Workshop (C)",
+      type: "text",
+      rows: 3,
+      group: "copy",
+      description: "One phrase per line. The last line is drawn in the accent colour.",
+    }),
+    defineField({
+      name: "contactInstrument",
+      title: "Contact line — Instrument (A)",
+      type: "string",
+      group: "copy",
+      description: "Ends with the linked phrase below.",
+    }),
+    defineField({ name: "contactInstrumentLink", title: "Contact link text — Instrument (A)", type: "string", group: "copy" }),
+    defineField({ name: "contactDeepfield", title: "Contact line — Deep Field (B)", type: "string", group: "copy" }),
+    defineField({
+      name: "contactDeepfieldEmphasis",
+      title: "Italic lead-in — Deep Field (B)",
+      type: "string",
+      group: "copy",
+      description: "e.g. “Say hello.” — shown in italics before the contact line.",
+    }),
+
+    defineField({ name: "email", type: "string", group: "links", validation: (r) => r.email() }),
+    defineField({ name: "github", type: "url", group: "links" }),
+    defineField({ name: "linkedin", type: "url", group: "links" }),
+    defineField({ name: "resume", title: "Résumé (PDF)", type: "file", group: "links", options: { accept: ".pdf" } }),
+
+    defineField({ name: "school", type: "string", group: "education" }),
+    defineField({ name: "degree", type: "string", group: "education" }),
+    defineField({ name: "educationYears", title: "Years", type: "string", group: "education" }),
+  ],
+  preview: { prepare: () => ({ title: "Site settings" }) },
+});

@@ -1,5 +1,5 @@
 import { getMode } from "../../../../lib/mode.server";
-import { getAllPosts } from "../../../../sanity/lib/queries";
+import { getAllPosts, getSite } from "../../../../sanity/lib/queries";
 import Writing from "../../../../components/sections/Writing";
 import Contact from "../../../../components/sections/Contact";
 import { NAV_LABELS } from "../../../../components/sections/Nav";
@@ -7,7 +7,7 @@ import { NAV_LABELS } from "../../../../components/sections/Nav";
 export const metadata = { title: "Writing — Anuj Karn" };
 
 export default async function WritingPage() {
-  const [mode, posts] = await Promise.all([getMode(), getAllPosts()]);
+  const [mode, site, posts] = await Promise.all([getMode(), getSite(), getAllPosts()]);
 
   if (posts.length === 0) {
     return (
@@ -18,7 +18,7 @@ export default async function WritingPage() {
             Nothing published yet.
           </h1>
         </section>
-        <Contact mode={mode} />
+        <Contact mode={mode} site={site} />
       </>
     );
   }
@@ -26,7 +26,7 @@ export default async function WritingPage() {
   return (
     <>
       <Writing mode={mode} posts={posts} standalone />
-      <Contact mode={mode} />
+      <Contact mode={mode} site={site} />
     </>
   );
 }

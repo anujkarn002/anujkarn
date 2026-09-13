@@ -3,13 +3,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { PortableText } from "@portabletext/react";
 import { getMode } from "../../../../../lib/mode.server";
-import { getPostBySlug } from "../../../../../sanity/lib/queries";
+import { getPostBySlug, getSite } from "../../../../../sanity/lib/queries";
 import { urlForImage } from "../../../../../sanity/lib/image";
 import Contact from "../../../../../components/sections/Contact";
 
 export default async function PostPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const [mode, post] = await Promise.all([getMode(), getPostBySlug(slug)]);
+  const [mode, site, post] = await Promise.all([getMode(), getSite(), getPostBySlug(slug)]);
   if (!post) notFound();
 
   const date = new Intl.DateTimeFormat("en", { year: "numeric", month: "long", day: "numeric" }).format(new Date(post.publishedAt));
@@ -58,7 +58,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
           </div>
         </div>
       </article>
-      <Contact mode={mode} />
+      <Contact mode={mode} site={site} />
     </>
   );
 }

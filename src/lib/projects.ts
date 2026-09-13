@@ -1,3 +1,6 @@
+// Fallback projects, used only when Sanity has no project documents.
+// The live list is edited in the Studio (/studio → Projects).
+
 export interface Project {
   id: string;
   title: string;
@@ -7,10 +10,10 @@ export interface Project {
   stack: string[];
   year: string;
   link?: string;
+  imageUrl?: string | null;
 }
 
-// Drawn from the CV. Employer work — no public links unless one is added.
-export const projects: Project[] = [
+export const defaultProjects: Project[] = [
   {
     id: "agentic-data-platform",
     title: "Agentic AI Data Platform",
@@ -64,9 +67,7 @@ export const projects: Project[] = [
     id: "hipaa-booking",
     title: "HIPAA Appointment Booking",
     description: "Appointment scheduling for a US healthcare provider.",
-    detail: [
-      "HIPAA-compliant booking app with a custom component library and multilingual form handling — user friction down 40%.",
-    ],
+    detail: ["HIPAA-compliant booking app with a custom component library and multilingual form handling — user friction down 40%."],
     client: "Leapfrog Technology",
     stack: ["React Native", "TypeScript"],
     year: "2022",
@@ -84,7 +85,3 @@ export const projects: Project[] = [
     year: "2021",
   },
 ];
-
-export function getProject(id: string) {
-  return projects.find((p) => p.id === id) ?? null;
-}

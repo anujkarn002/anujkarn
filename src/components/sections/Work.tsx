@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { Mode } from "../../lib/mode";
 import type { Project } from "../../lib/projects";
 import { ArmFigure } from "./Figures";
@@ -111,13 +112,17 @@ export default function Work({ mode, projects, standalone = false }: { mode: Mod
         {projects.map((p, i) => (
           <Link key={p.id} href={`/work/${p.id}`} className={`group flex flex-col gap-6 ${spans[i % spans.length]}`}>
             <div
-              className="transition-colors"
+              className="relative overflow-hidden"
               style={{
                 aspectRatio: ratios[i % ratios.length],
                 background: "linear-gradient(160deg, #1a1a1e, #0f0f12)",
                 border: "1px solid var(--line)",
               }}
-            />
+            >
+              {p.imageUrl && (
+                <Image src={p.imageUrl} alt="" fill className="object-cover transition-transform duration-700 group-hover:scale-[1.02]" sizes="(max-width: 768px) 100vw, 60vw" />
+              )}
+            </div>
             <div className="flex justify-between items-baseline gap-6 flex-wrap">
               <div className="font-light" style={{ fontSize: i === 0 ? 40 : 30, letterSpacing: "-0.02em" }}>{p.title}</div>
               <div className="label">{p.stack.slice(0, 2).join(" · ")} · {p.year}</div>

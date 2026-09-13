@@ -1,11 +1,10 @@
 "use client";
 import { useState } from "react";
 import type { Mode } from "../../lib/mode";
-import { site } from "../../lib/site";
 
 type Status = "idle" | "sending" | "sent" | "error";
 
-export default function NoteComposer({ mode }: { mode: Mode }) {
+export default function NoteComposer({ mode, email }: { mode: Mode; email: string }) {
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState("");
   const [from, setFrom] = useState("");
@@ -64,7 +63,7 @@ export default function NoteComposer({ mode }: { mode: Mode }) {
     >
       {mode === "workshop" && (
         <div style={{ ...mono, color: "var(--faint)" }}>
-          <span style={{ color: "var(--accent)" }}>$</span> mail {site.email}
+          <span style={{ color: "var(--accent)" }}>$</span> mail {email}
           <br />
           <span>{"// or leave a note — it lands in my Discord"}</span>
         </div>

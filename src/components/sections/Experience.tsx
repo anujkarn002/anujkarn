@@ -1,9 +1,19 @@
 import type { Mode } from "../../lib/mode";
-import { site } from "../../lib/site";
+import type { SiteContent, ExperienceItem } from "../../lib/site";
 
-const { experience, education } = site;
-
-export default function Experience({ mode, standalone = false }: { mode: Mode; standalone?: boolean }) {
+export default function Experience({
+  mode,
+  site,
+  experience,
+  standalone = false,
+}: {
+  mode: Mode;
+  site: SiteContent;
+  experience: ExperienceItem[];
+  standalone?: boolean;
+}) {
+  const education = { school: site.school, degree: site.degree, years: site.educationYears };
+  if (experience.length === 0) return null;
   if (mode === "instrument") {
     return (
       <section className={`gutter ${standalone ? "pt-16" : "pt-[120px]"}`}>
