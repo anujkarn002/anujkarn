@@ -116,6 +116,13 @@ export async function getPhotos(): Promise<Photo[]> {
 
 /* ---------- Posts ---------- */
 
+export interface PostImageAsset {
+  url: string;
+  width: number;
+  height: number;
+  extension: string;
+}
+
 export interface Post {
   _id: string;
   title: string;
@@ -124,12 +131,18 @@ export interface Post {
   tags?: string[];
   publishedAt: string;
   coverImageUrl?: string | null;
+  cover?: { asset: PostImageAsset; alt?: string; caption?: string } | null;
   body?: PortableTextBlock[];
 }
 
+const IMAGE_ASSET = `"asset": asset->{ _id, url, extension, "width": metadata.dimensions.width, "height": metadata.dimensions.height }`;
+
 const POST_PROJECTION = `{
-  _id, title, "slug": slug.current, excerpt, tags, publishedAt, mainImage
+  _id, title, "slug": slug.current, excerpt, tags, publishedAt,
+  mainImage{ ..., ${IMAGE_ASSET} }
 }`;
+
+const POST_BODY = `body[]{ ..., _type == "image" => { ..., ${IMAGE_ASSET} } }`;
 
 function mapPost(doc: any): Post {
   return {
@@ -139,7 +152,8 @@ function mapPost(doc: any): Post {
     excerpt: doc.excerpt,
     tags: doc.tags,
     publishedAt: doc.publishedAt,
-    coverImageUrl: doc.mainImage ? urlForImage(doc.mainImage).width(1400).height(788).fit("crop").url() : null,
+    coverImageUrl: doc.mainImage?.asset ? urlForImage(doc.mainImage).width(1600).fit("max").auto("format").url() : null,
+    cover: doc.mainImage?.asset ? { asset: doc.mainImage.asset, alt: doc.mainImage.alt, caption: doc.mainImage.caption } : null,
     body: doc.body,
   };
 }
@@ -155,7 +169,7 @@ export async function getAllPosts(): Promise<Post[]> {
 
 export async function getPostBySlug(slug: string): Promise<Post | null> {
   const doc = await fetchOr<any | null>(
-    `*[_type == "post" && slug.current == $slug][0]${POST_PROJECTION.replace("}", ", body }")}`,
+    `*[_type == "post" && slug.current == $slug][0]${POST_PROJECTION.replace(/\}$/, `, ${POST_BODY} }`)}`,
     { slug },
     null
   );

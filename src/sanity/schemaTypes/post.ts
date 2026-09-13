@@ -1,5 +1,20 @@
 import { defineField, defineType } from "sanity";
 
+const imageFields = [
+  defineField({
+    name: "alt",
+    title: "Alt text",
+    type: "string",
+    description: "Describes the image for screen readers and when it fails to load.",
+  }),
+  defineField({
+    name: "caption",
+    title: "Caption",
+    type: "string",
+    description: "Shown under the image.",
+  }),
+];
+
 export default defineType({
   name: "post",
   title: "Post",
@@ -23,12 +38,14 @@ export default defineType({
       title: "Excerpt",
       type: "text",
       rows: 3,
+      description: "Shown in lists and used as the page description.",
     }),
     defineField({
       name: "mainImage",
-      title: "Cover Image",
+      title: "Cover image",
       type: "image",
       options: { hotspot: true },
+      fields: imageFields,
     }),
     defineField({
       name: "tags",
@@ -39,7 +56,7 @@ export default defineType({
     }),
     defineField({
       name: "publishedAt",
-      title: "Published At",
+      title: "Published at",
       type: "datetime",
       initialValue: () => new Date().toISOString(),
     }),
@@ -48,8 +65,17 @@ export default defineType({
       title: "Body",
       type: "array",
       of: [
-        { type: "block" },
-        { type: "image", options: { hotspot: true } },
+        {
+          type: "block",
+          styles: [
+            { title: "Normal", value: "normal" },
+            { title: "Heading", value: "h2" },
+            { title: "Subheading", value: "h3" },
+            { title: "Quote", value: "blockquote" },
+          ],
+        },
+        { type: "image", options: { hotspot: true }, fields: imageFields },
+        { type: "code", options: { withFilename: true } },
       ],
     }),
   ],
