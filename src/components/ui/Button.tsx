@@ -6,7 +6,7 @@ import clsx from "clsx";
 
 type ButtonBaseProps = {
   children: ReactNode;
-  variant?: "primary" | "secondary";
+  variant?: "primary" | "secondary" | "amber";
   className?: string;
 };
 
@@ -33,6 +33,7 @@ export const Button = (props: ButtonProps) => {
   const variants = {
     primary: 'bg-white text-matte-black border-2 border-white hover:bg-matte-black hover:text-white',
     secondary: 'bg-matte-black text-white border-2 border-white hover:bg-white hover:text-matte-black',
+    amber: 'bg-transparent text-amber border-2 border-amber shadow-amber-glow hover:bg-amber hover:text-matte-black',
   };
 
   const classes = `${base} ${variants[variant]} ${className || ''}`;

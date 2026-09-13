@@ -13,14 +13,14 @@ interface ProjectCardProps {
 
 export default function ProjectCard({ id, title, description, link, tags = [], featured }: ProjectCardProps) {
   return (
-    <div className={`mb-8 p-5 bg-matte-black border border-white/10 rounded-lg shadow-none hover:bg-white/5 transition group ${featured ? 'border-white/30' : ''}`}>
+    <div className={`hud-panel tilt-card mb-8 p-5 bg-matte-black/60 rounded-lg group ${featured ? 'border-amber/50' : ''}`}>
       <div className="flex items-center gap-2 mb-2">
         <FaRegFolderOpen className="text-white/40 text-lg" />
         <Link href={`/projects/${id}`} className="text-xl font-bold text-white retro-section mb-0 underline-offset-2 hover:underline">
           {title}
         </Link>
         {featured && (
-          <span className="ml-2 px-2 py-0.5 rounded-full bg-white/10 text-white/80 text-xs font-semibold tracking-wide border border-white/30">Featured</span>
+          <span className="ml-2 px-2 py-0.5 rounded-full bg-amber/10 text-amber text-xs font-semibold tracking-wide border border-amber/40">Featured</span>
         )}
       </div>
       <p className="text-white/70 mb-2 text-sm">{description}</p>
