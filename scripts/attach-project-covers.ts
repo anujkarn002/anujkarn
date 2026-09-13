@@ -1,13 +1,15 @@
 // One-off, run with the CLI's own login:
-//   bunx sanity exec scripts/attach-project-covers.ts --with-user-token -- <dir-of-jpgs>
+//   bunx sanity exec scripts/attach-project-covers.ts --with-user-token -- <dir-of-jpgs> [--force]
 // Attaches <dir>/<slug>.jpg as the cover image of the project with that slug.
-// Skips projects that already have a cover, so re-running is safe.
+// Skips projects that already have a cover unless --force is given.
 import { readdirSync, createReadStream } from "node:fs";
 import { basename, join } from "node:path";
 import { getCliClient } from "sanity/cli";
 
-const dir = process.argv[2];
-if (!dir) throw new Error("usage: attach-project-covers.ts <dir>");
+const args = process.argv.slice(2);
+const force = args.includes("--force");
+const dir = args.find((a) => !a.startsWith("--"));
+if (!dir) throw new Error("usage: attach-project-covers.ts <dir> [--force]");
 
 const client = getCliClient({ apiVersion: "2024-01-01" });
 
@@ -23,8 +25,8 @@ async function main() {
       console.log(`skip ${slug}: no project`);
       continue;
     }
-    if (project.hasImage) {
-      console.log(`skip ${slug}: already has a cover`);
+    if (project.hasImage && !force) {
+      console.log(`skip ${slug}: already has a cover (use --force to replace)`);
       continue;
     }
     const asset = await client.assets.upload("image", createReadStream(join(dir, file)), { filename: file });
