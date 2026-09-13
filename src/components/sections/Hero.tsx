@@ -18,8 +18,7 @@ export default function Hero({ mode }: { mode: Mode }) {
               Software that has to <em>survive</em> contact with the real world.
             </h1>
             <p className="rise rise-2 m-0 max-w-[560px]" style={{ fontSize: 19, lineHeight: 1.5, color: "var(--muted)" }}>
-              {site.role.replace("Full Stack", "full-stack").toLowerCase().replace(/^\w/, (c) => c.toUpperCase())}. I build tools for healthcare,
-              finance and hardware teams — the middle layer where data, devices and people meet. Previously {previous.join(", ")}; now {site.company}.
+              {site.role} at {site.company}. {site.summary} Previously {previous.join(", ")}.
             </p>
             <div className="rise rise-3 flex gap-8 items-center">
               <Link href="/work" className="label pb-1" style={{ color: "var(--fg)", borderBottom: "1px solid var(--fg)" }}>
@@ -55,8 +54,8 @@ export default function Hero({ mode }: { mode: Mode }) {
             <span style={{ color: "var(--accent)" }}>Keep it running.</span>
           </h1>
           <p className="rise rise-2 m-0 max-w-[620px] font-medium" style={{ fontSize: 18, lineHeight: 1.5, color: "var(--muted)" }}>
-            {site.role} at {site.company}. Backend-heavy, hardware-adjacent. Python, TypeScript, Go, and whatever the
-            device on the bench speaks.
+            {site.role} at {site.company}. Mobile, web and backend, end to end — lately agentic AI and data platforms on
+            Databricks, GCP and Azure.
           </p>
         </div>
         <div className="md:col-span-4 grid grid-rows-3" style={{ borderTop: "1px solid var(--line)" }}>
@@ -77,11 +76,11 @@ export default function Hero({ mode }: { mode: Mode }) {
           <div className="p-6 flex flex-col justify-between gap-6">
             <div className="label">Stack</div>
             <div style={{ fontFamily: "var(--font-mono)", fontSize: 13, lineHeight: 1.6, color: "var(--muted)" }}>
-              py · ts · go
+              {site.stack.languages.map((s) => s.toLowerCase()).join(" · ")}
               <br />
-              pg · docker · aws
+              {site.stack.platforms.slice(0, 3).map((s) => s.toLowerCase()).join(" · ")}
               <br />
-              opencv · c#
+              {site.stack.infra.slice(0, 3).map((s) => s.toLowerCase()).join(" · ")}
             </div>
           </div>
         </div>
@@ -99,13 +98,12 @@ export default function Hero({ mode }: { mode: Mode }) {
       </h1>
       <div className="rise rise-2 grid grid-cols-1 md:grid-cols-12 gap-x-6 gap-y-10">
         <p className="md:col-span-5 m-0 font-light" style={{ fontSize: 22, lineHeight: 1.45, color: "var(--muted)" }}>
-          {site.role} at {site.company}. Healthcare, fintech and hardware — mostly making systems that other people rely on a
-          little less fragile.
+          {site.role} at {site.company}. {site.summary}
         </p>
         <div className="md:col-start-9 md:col-span-4 flex flex-col gap-2.5 md:self-end">
           <div className="label">Currently</div>
           <div className="font-light" style={{ fontSize: 18 }}>
-            {site.company}, remote
+            {site.company}, {site.location}
           </div>
           <div className="label mt-4">Before</div>
           <div className="font-light" style={{ fontSize: 18 }}>

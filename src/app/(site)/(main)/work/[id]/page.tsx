@@ -20,17 +20,25 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
           <div className="md:col-span-3 flex flex-col gap-1.5">
             <div className="label">{label}</div>
             <div className="label">{project.year}</div>
+            <div className="label mt-4">{project.client}</div>
           </div>
           <div className="md:col-span-8 flex flex-col gap-8">
             <h1
               className={`display m-0 ${mode === "workshop" ? "uppercase" : ""}`}
-              style={{ fontSize: "clamp(44px, 6.5vw, 96px)", lineHeight: 0.95, letterSpacing: mode === "workshop" ? "-0.045em" : "-0.03em" }}
+              style={{ fontSize: "clamp(44px, 6.5vw, 96px)", lineHeight: 0.95, letterSpacing: mode === "workshop" ? "-0.045em" : "-0.03em", textWrap: "balance" }}
             >
               {project.title}
             </h1>
-            <p className="m-0 max-w-[620px]" style={{ fontSize: 20, lineHeight: 1.5, color: "var(--muted)", fontWeight: mode === "deepfield" ? 300 : undefined }}>
+            <p className="m-0 max-w-[620px]" style={{ fontSize: 22, lineHeight: 1.45, fontWeight: mode === "deepfield" ? 300 : undefined }}>
               {project.description}
             </p>
+            <div className="flex flex-col gap-5 max-w-[640px]">
+              {project.detail.map((d, i) => (
+                <p key={i} className="m-0" style={{ fontSize: 17, lineHeight: 1.6, color: "var(--muted)", fontWeight: mode === "deepfield" ? 300 : undefined }}>
+                  {d}
+                </p>
+              ))}
+            </div>
             <div className="flex flex-wrap gap-x-8 gap-y-3 items-baseline">
               <div className="label">{project.stack.join(" · ")}</div>
               {project.link && (

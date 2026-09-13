@@ -10,7 +10,7 @@ export default function Work({ mode, projects, standalone = false }: { mode: Mod
         <div className="grid grid-cols-1 md:grid-cols-12 gap-x-6 gap-y-6">
           <div className="md:col-span-3">
             <div className="label">Selected work</div>
-            <div className="label mt-1.5">2023 — 2026</div>
+            <div className="label mt-1.5">{projects[projects.length - 1].year} — {projects[0].year}</div>
           </div>
           <div className="md:col-span-9 flex flex-col">
             <div className="rule" />

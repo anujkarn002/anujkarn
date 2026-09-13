@@ -30,7 +30,7 @@ export default function Nav({ mode }: { mode: Mode }) {
             {site.name} — Engineer
           </Link>
           <div className="label hidden md:block md:col-span-3">Sheet 01 / Index</div>
-          <div className="label hidden md:block md:col-span-3">{site.location} · Remote</div>
+          <div className="label hidden md:block md:col-span-3">{site.location}</div>
           <div className="col-span-2 md:col-span-3 flex items-center justify-between md:justify-end gap-6">
             <Links mode={mode} />
             <ModeSwitcher />
@@ -54,7 +54,7 @@ export default function Nav({ mode }: { mode: Mode }) {
           Full-stack · Systems
         </div>
         <div className="label px-6 py-4 hidden md:block" style={{ borderRight: "1px solid var(--line)" }}>
-          27.7172° N, 85.3240° E
+          {site.coordinates}
         </div>
         <div className="px-6 py-3 flex items-center justify-end gap-6">
           <Links mode={mode} />
