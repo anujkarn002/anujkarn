@@ -8,12 +8,12 @@ import { getCliClient } from "sanity/cli";
 
 const args = process.argv.slice(2);
 const force = args.includes("--force");
-const dir = args.find((a) => !a.startsWith("--"));
-if (!dir) throw new Error("usage: attach-project-covers.ts <dir> [--force]");
+const dirArg = args.find((a) => !a.startsWith("--"));
+if (!dirArg) throw new Error("usage: attach-project-covers.ts <dir> [--force]");
 
 const client = getCliClient({ apiVersion: "2024-01-01" });
 
-async function main() {
+async function main(dir: string) {
   const files = readdirSync(dir).filter((f) => f.endsWith(".jpg"));
   for (const file of files) {
     const slug = basename(file, ".jpg");
@@ -35,7 +35,7 @@ async function main() {
   }
 }
 
-main().catch((err) => {
+main(dirArg).catch((err) => {
   console.error(err);
   process.exit(1);
 });
